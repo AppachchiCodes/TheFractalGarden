@@ -1,0 +1,325 @@
+/* Button Styles */
+.btn {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+}
+
+.btn:hover {
+  background: var(--color-border);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Colorize Button */
+.colorize-button {
+  position: fixed;
+  z-index: var(--z-colorize-btn);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-slow);
+  box-shadow: var(--shadow-lg);
+}
+
+.colorize-button:hover {
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.colorize-button:active {
+  transform: scale(0.95);
+}
+
+.colorize-button svg {
+  width: 32px;
+  height: 32px;
+  transition: all var(--transition-base);
+}
+
+/* Monochrome icon colors */
+.colorize-button svg .color-segment {
+  fill: #666666;
+  transition: fill var(--transition-slow);
+}
+
+/* Color mode active - colorful icon */
+[data-color-mode="true"] .colorize-button svg .color-segment {
+  transition: fill var(--transition-slow);
+}
+
+[data-color-mode="true"] .colorize-button {
+  background: #ffffff;
+  border-color: #cccccc;
+}
+
+/* Desktop positioning - top right near heading */
+@media (min-width: 769px) {
+  .colorize-button {
+    top: 80px;
+    right: 40px;
+  }
+}
+
+/* Mobile positioning - bottom right */
+@media (max-width: 768px) {
+  .colorize-button {
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+/* Artwork Card */
+.artwork-card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-slow);
+}
+
+.artwork-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.artwork-header {
+  padding: var(--spacing-md);
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  transition: all var(--transition-slow);
+}
+
+.artwork-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0;
+  transition: color var(--transition-slow);
+}
+
+.artwork-canvas-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--color-canvas-bg);
+  overflow: hidden;
+  transition: background var(--transition-slow);
+}
+
+.artwork-canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.artwork-footer {
+  padding: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-slow);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: modalSlideIn 0.3s ease;
+  transition: background var(--transition-slow), border-color var(--transition-slow);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 24px;
+  line-height: 1;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.modal-close:hover {
+  background: var(--color-border);
+}
+
+.modal-title {
+  margin-bottom: var(--spacing-sm);
+  padding-right: var(--spacing-xl);
+  transition: color var(--transition-slow);
+}
+
+.modal-description {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-lg);
+  transition: color var(--transition-slow);
+}
+
+.modal-code {
+  position: relative;
+  margin-top: var(--spacing-lg);
+}
+
+.modal-code h3 {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-sm);
+  transition: color var(--transition-slow);
+}
+
+.modal-code pre {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  overflow-x: auto;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  position: relative;
+  max-height: 300px;
+  overflow-y: hidden;
+  transition: all var(--transition-slow);
+}
+
+.code-blur {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--color-bg) 90%);
+  pointer-events: none;
+}
+
+
+/* ARTWORK CARD - Title (artwork name on card) */
+[data-color-mode="true"] .artwork-title {
+  color: #1a1a1a;  /* ← CHANGE: Card title text color */
+}
+
+/* 🎨 ARTWORK CARD - Buttons (Randomize & Info buttons on card) */
+[data-color-mode="true"] .artwork-card .btn {
+  background: #A89F8F;   /* ← CHANGE: Button background color */
+  color: #1a1a1a;        /* ← CHANGE: Button text color */
+  border-color: #8a8878; /* ← CHANGE: Button border color */
+}
+
+[data-color-mode="true"] .artwork-card .btn:hover {
+  background: #9a9080;  /* ← CHANGE: Button hover background */
+}
+
+/* 🎨 MODAL TEXT (Modal title, description, code) */
+[data-color-mode="true"] .modal-title {
+  color: #1a1a1a;  /* ← CHANGE: Artwork name in modal */
+}
+
+[data-color-mode="true"] .modal-description {
+  color: #000000;  /* ← CHANGE: Description text */
+}
+
+[data-color-mode="true"] .modal-code h3 {
+  color: #1a1a1a;  /* ← CHANGE: "p5.js Code:" heading */
+}
+
+[data-color-mode="true"] .modal-code pre {
+  color: #3a3a3a;       /* ← CHANGE: Code text color */
+  background: #b0ab9e;  /* ← CHANGE: Code background */
+  border-color: #8a8878;
+}
+
+[data-color-mode="true"] .code-blur {
+  background: linear-gradient(to bottom, transparent, #b0ab9e 90%);
+}
+
+[data-color-mode="true"] .modal-close {
+  color: #1a1a1a;        /* ← CHANGE: Close X color */
+  border-color: #8a8878;
+}
+
+[data-color-mode="true"] .modal-close:hover {
+  background: #9a9888;
+}
+
+/* Coming Soon */
+.coming-soon {
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-lg);
+}
+
+.coming-soon-text {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-lg);
+  transition: color var(--transition-slow);
+}

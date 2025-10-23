@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Fractal Garden - Explore mesmerizing generative art and interactive visualizations">
+  <title>The Fractal Garden | Generative Art Gallery</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/pages.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">The Fractal Garden</a>
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link active">Art Gallery</a></li>
+        <li><a href="/downloads.html" class="nav-link">Download</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="hero">
+      <h1 class="hero-title">The Fractal Garden</h1>
+      <p class="hero-subtitle">Explore the beauty of generative algorithms</p>
+      <p class="hero-credit">Project by U. Hewage</p>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery" id="gallery">
+      <!-- Artwork cards will be dynamically inserted here -->
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 The Fractal Garden. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="artwork-modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <p class="modal-description" id="modal-description"></p>
+      <div class="modal-code">
+        <h3>Code Snippet</h3>
+        <pre id="modal-code"></pre>
+        <div class="code-blur"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+  <script type="module" src="/assets/js/core/app.js"></script>
+</body>
+</html>
