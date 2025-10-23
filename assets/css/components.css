@@ -263,7 +263,7 @@
 }
 
 
-/* ARTWORK CARD - Title (artwork name on card) */
+
 [data-color-mode="true"] .artwork-title {
   color: #1a1a1a;  /* ← CHANGE: Card title text color */
 }
