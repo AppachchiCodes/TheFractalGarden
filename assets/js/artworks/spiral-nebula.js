@@ -16,17 +16,30 @@ export class SpiralNebula {
   }
 
   generateConfig() {
-    return {
-      particleCount: Math.floor(Math.random() * 400) + 300, // 300-700
-      spiralArms: Math.floor(Math.random() * 3) + 3, // 3-5 arms
-      spiralTightness: Math.random() * 0.1 + 0.15, // 0.15-0.25
-      rotationSpeed: Math.random() * 0.005 + 0.003, // 0.003-0.008
-      particleSpeed: Math.random() * 0.3 + 0.2, // 0.2-0.5
-      fadeSpeed: Math.random() * 15 + 25, // 25-40
-      alpha: Math.floor(Math.random() * 80) + 100, // 100-180
-      particleSize: Math.random() * 1 + 1 // 1-2
-    };
-  }
+  return {
+    particleCount: 500,
+    spiralArms: 4,
+    spiralTightness: 0.2,
+    rotationSpeed: 0.005,
+    particleSpeed: 0.35,
+    fadeSpeed: 30,
+    alpha: 140,
+    particleSize: 1.5
+  };
+}
+
+generateRandomConfig() {
+  return {
+    particleCount: Math.floor(Math.random() * 800) + 200, 
+    spiralArms: Math.floor(Math.random() * 6) + 2, 
+    spiralTightness: Math.random() * 0.3 + 0.05, 
+    rotationSpeed: Math.random() * 0.014 + 0.001, 
+    particleSpeed: Math.random() * 0.7 + 0.1, 
+    fadeSpeed: Math.random() * 45 + 15, 
+    alpha: Math.floor(Math.random() * 140) + 80, 
+    particleSize: Math.random() * 2.5 + 0.5 
+  };
+}
 
   init() {
     const self = this;
@@ -103,7 +116,7 @@ export class SpiralNebula {
 
   randomize() {
     this.colorMode = window.colorMode || false;
-    this.config = this.generateConfig();
+    this.config = this.generateRandomConfig();
     this.particles = [];
     if (this.instance) {
       this.destroy();

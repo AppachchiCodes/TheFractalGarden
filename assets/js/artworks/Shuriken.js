@@ -15,17 +15,28 @@ export class Shuriken {
   }
 
   generateConfig() {
-    return {
-      a: Math.floor(Math.random() * 3) + 2, // 2-4
-      b: Math.floor(Math.random() * 3) + 2, // 2-4
-      particleCount: Math.floor(Math.random() * 100) + 150, // 150-250
-      radius: Math.floor(Math.random() * 50) + 100, // 100-150
-      particleSize: Math.random() * 2 + 2, // 2-4
-      timeSpeed: Math.random() * 0.005 + 0.008, // 0.008-0.013
-      alpha: Math.random() * 0.2 + 0.2 // 0.2-0.4
-    };
-  }
+  return {
+    a: 3,
+    b: 2,
+    particleCount: 200,
+    radius: 125,
+    particleSize: 3,
+    timeSpeed: 0.01,
+    alpha: 0.3
+  };
+}
 
+generateRandomConfig() {
+  return {
+    a: Math.floor(Math.random() * 5) + 1, 
+    b: Math.floor(Math.random() * 5) + 1, 
+    particleCount: Math.floor(Math.random() * 700) + 100, 
+    radius: Math.floor(Math.random() * 200) + 50, 
+    particleSize: Math.random() * 5 + 1, 
+    timeSpeed: Math.random() * 0.02 + 0.005, 
+    alpha: Math.random() * 0.4 + 0.1
+  };
+}
   init() {
     const self = this;
     const config = this.config;
@@ -112,7 +123,7 @@ export class Shuriken {
   }
 
   randomize() {
-    this.config = this.generateConfig();
+    this.config = this.generateRandomConfig();
     this.t = 0;
     if (this.instance) {
       this.destroy();

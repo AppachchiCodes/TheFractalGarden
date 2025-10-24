@@ -15,17 +15,29 @@ export class NeuralPulseGrid {
   }
 
   generateConfig() {
-    return {
-      nodeCount: Math.floor(Math.random() * 40) + 60, // 60-100
-      nodeSpeed: Math.random() * 0.5 + 0.5, // 0.5-1
-      minRadius: Math.random() * 2 + 2, // 2-4
-      maxRadius: Math.random() * 3 + 4, // 4-7
-      connectionDistance: Math.random() * 40 + 70, // 70-110
-      fadeSpeed: Math.random() * 20 + 40, // 40-60
-      nodeAlpha: Math.floor(Math.random() * 100) + 150, // 150-250
-      lineAlpha: Math.floor(Math.random() * 50) + 30 // 30-80
-    };
-  }
+  return {
+    nodeCount: 80,
+    nodeSpeed: 0.75,
+    minRadius: 3,
+    maxRadius: 5,
+    connectionDistance: 90,
+    fadeSpeed: 50,
+    nodeAlpha: 200,
+    lineAlpha: 55
+  };
+}
+generateRandomConfig() {
+  return {
+    nodeCount: Math.floor(Math.random() * 120) + 30, 
+    nodeSpeed: Math.random() * 1.7 + 0.3, 
+    minRadius: Math.random() * 3 + 1, 
+    maxRadius: Math.random() * 7 + 3, 
+    connectionDistance: Math.random() * 150 + 50, 
+    fadeSpeed: Math.random() * 60 + 20, 
+    nodeAlpha: Math.floor(Math.random() * 155) + 100, 
+    lineAlpha: Math.floor(Math.random() * 80) + 20 
+  };
+}
 
   init() {
     const self = this;
@@ -149,7 +161,7 @@ export class NeuralPulseGrid {
   }
 
   randomize() {
-    this.config = this.generateConfig();
+    this.config = this.generateRandomConfig();
     this.nodes = [];
     if (this.instance) {
       this.destroy();

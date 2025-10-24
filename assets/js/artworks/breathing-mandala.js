@@ -15,16 +15,16 @@ export class BreathingMandala {
   }
 
   generateConfig() {
-    return {
-      layers: Math.floor(Math.random() * 4) + 6, // 6-9 layers
-      sides: Math.floor(Math.random() * 4) + 6, // 6-9 sides
-      breathSpeed: Math.random() * 0.015 + 0.015, // 0.015-0.03
-      minSize: Math.floor(Math.random() * 20) + 30, // 30-50
-      maxSize: Math.floor(Math.random() * 40) + 80, // 80-120
-      rotationSpeed: Math.random() * 0.003 + 0.002, // 0.002-0.005
-      alpha: Math.floor(Math.random() * 100) + 100 // 100-200
-    };
-  }
+  return {
+    layers: Math.floor(Math.random() * 12) + 3, 
+    sides: Math.floor(Math.random() * 9) + 3, 
+    breathSpeed: Math.random() * 0.05 + 0.01, 
+    minSize: Math.floor(Math.random() * 30) + 20, 
+    maxSize: Math.floor(Math.random() * 80) + 60, 
+    rotationSpeed: Math.random() * 0.008 + 0.001, 
+    alpha: Math.floor(Math.random() * 120) + 80 
+  };
+}
 
   init() {
     const self = this;

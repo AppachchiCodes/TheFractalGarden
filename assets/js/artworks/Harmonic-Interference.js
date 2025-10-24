@@ -14,18 +14,31 @@ export class HarmonicInterference {
     return ['#667EEA', '#764BA2', '#F093FB', '#4FACFE'];
   }
 
-  generateConfig() {
-    return {
-      rings: Math.floor(Math.random() * 3) + 6, // 6-8
-      baseRadius: Math.floor(Math.random() * 10) + 15, // 15-25
-      radiusSpacing: Math.floor(Math.random() * 10) + 15, // 15-25
-      waveAmplitude: Math.floor(Math.random() * 50) + 80, // 80-130
-      waveFrequency: Math.floor(Math.random() * 3) + 4, // 4-6
-      timeSpeed: Math.random() * 0.01 + 0.015, // 0.015-0.025
-      strokeAlpha: Math.floor(Math.random() * 50) + 120, // 120-170
-      strokeWeight: Math.random() * 0.5 + 1 // 1-1.5
-    };
-  }
+      generateConfig() {
+      return {
+        rings: 7,
+        baseRadius: 20,
+        radiusSpacing: 20,
+        waveAmplitude: 100,
+        waveFrequency: 5,
+        timeSpeed: 0.02,
+        strokeAlpha: 150,
+        strokeWeight: 1.2
+      };
+    }
+    generateRandomConfig() {
+      
+      return {
+        rings: Math.floor(Math.random() * 12) + 3, 
+        baseRadius: Math.floor(Math.random() * 30) + 10, 
+        radiusSpacing: Math.floor(Math.random() * 25) + 10, 
+        waveAmplitude: Math.floor(Math.random() * 250) + 50, 
+        waveFrequency: Math.floor(Math.random() * 18) + 2, 
+        timeSpeed: Math.random() * 0.04 + 0.01, 
+        strokeAlpha: Math.floor(Math.random() * 100) + 80, 
+        strokeWeight: Math.random() * 1.5 + 0.5 
+      };
+    }
 
   init() {
     const self = this;
@@ -113,7 +126,7 @@ export class HarmonicInterference {
   }
 
   randomize() {
-    this.config = this.generateConfig();
+    this.config = this.generateRandomConfig();
     this.t = 0;
     if (this.instance) {
       this.destroy();

@@ -15,15 +15,16 @@ export class DynamicVectorFlow {
   }
 
   generateConfig() {
-    return {
-      lineCount: Math.floor(Math.random() * 100) + 150, // 150-250
-      noiseScale: Math.random() * 0.005 + 0.01, // 0.01-0.015
-      timeSpeed: Math.random() * 0.005 + 0.008, // 0.008-0.013
-      fadeSpeed: Math.random() * 10 + 20, // 20-30
-      alpha: Math.floor(Math.random() * 50) + 80, // 80-130
-      strokeWeight: Math.random() * 0.5 + 1 // 1-1.5
-    };
-  }
+  return {
+    lineCount: Math.floor(Math.random() * 250) + 50, 
+    noiseScale: Math.random() * 0.015 + 0.005, 
+    timeSpeed: Math.random() * 0.02 + 0.005, 
+    fadeSpeed: Math.random() * 30 + 10, 
+    alpha: Math.floor(Math.random() * 50) + 80, 
+    strokeWeight: Math.random() * 0.5 + 1, 
+    strokeMultiplier: Math.random() * 190 + 10 
+  };
+}
 
   init() {
     const self = this;

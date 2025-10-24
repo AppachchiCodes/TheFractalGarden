@@ -15,17 +15,17 @@ export class MorphingHexagrid {
   }
 
   generateConfig() {
-    return {
-      cols: Math.floor(Math.random() * 3) + 7, // 7-9
-      rows: Math.floor(Math.random() * 3) + 7, // 7-9
-      spacing: Math.floor(Math.random() * 10) + 18, // 18-28
-      baseSize: Math.floor(Math.random() * 5) + 12, // 12-17
-      sizeAmplitude: Math.floor(Math.random() * 5) + 8, // 8-13
-      timeSpeed: Math.random() * 0.01 + 0.015, // 0.015-0.025
-      strokeAlpha: Math.floor(Math.random() * 50) + 180, // 180-230
-      strokeWeight: Math.random() * 0.5 + 1 // 1-1.5
-    };
-  }
+  return {
+    cols: Math.floor(Math.random() * 6) + 5, 
+    rows: Math.floor(Math.random() * 6) + 5, 
+    spacing: Math.floor(Math.random() * 28) + 12, 
+    baseSize: Math.floor(Math.random() * 15) + 8, 
+    sizeAmplitude: Math.floor(Math.random() * 25) + 5, 
+    timeSpeed: Math.random() * 0.04 + 0.01, 
+    strokeAlpha: Math.floor(Math.random() * 100) + 130, 
+    strokeWeight: Math.random() * 1.0 + 0.5 
+  };
+}
 
   init() {
     const self = this;

@@ -15,15 +15,15 @@ export class MagneticParticlesOrbit {
   }
 
   generateConfig() {
-    return {
-      particleCount: Math.floor(Math.random() * 300) + 300, // 300-600
-      noiseScale: Math.random() * 0.003 + 0.003, // 0.003-0.006
-      angleMultiplier: Math.floor(Math.random() * 3) + 3, // 3-5
-      fadeSpeed: Math.random() * 20 + 30, // 30-50
-      alpha: Math.floor(Math.random() * 50) + 80, // 80-130
-      speed: Math.random() * 0.5 + 0.5 // 0.5-1
-    };
-  }
+  return {
+    particleCount: Math.floor(Math.random() * 600) + 200,
+    noiseScale: Math.random() * 0.007 + 0.003, 
+    angleMultiplier: Math.floor(Math.random() * 4) + 3, 
+    fadeSpeed: Math.random() * 45 + 5, 
+    alpha: Math.floor(Math.random() * 70) + 60, 
+    speed: Math.random() * 1.5 + 0.5 
+  };
+}
 
   init() {
     const self = this;
