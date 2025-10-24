@@ -1,5 +1,4 @@
 // Artwork Registry
-// This file contains metadata for all artworks in the gallery
 
 export const ARTWORKS = [
   {
@@ -36,7 +35,7 @@ export const ARTWORKS = [
     id: 'neural-pulse-grid',
     title: 'Neural Pulse Grid',
     description: 'A living network of interconnected nodes pulses with energy, resembling synaptic connections in a digital brain.',
-    module: () => import('../artworks/neural-pulse-grid.js')
+    module: () => import('../artworks/neural-pulse-grid.js?v=2')
   },
   {
     id: 'quantum-mirror',
@@ -54,7 +53,7 @@ export const ARTWORKS = [
     id: 'spiral-nebula',
     title: 'Spiral Nebula',
     description: 'Countless particles spiral outward in graceful arms, mimicking the birth of stars in distant galaxies.',
-    module: () => import('../artworks/spiral-nebula.js')
+    module: () => import('../artworks/spiral-nebula.js?v=2')
   },
   {
     id: 'breathing-mandala',
@@ -78,7 +77,7 @@ export const ARTWORKS = [
     id: 'shuriken',
     title: 'Shuriken',
     description: 'Particles trace parametric paths in spinning formations, drawing ancient symbols of balance and energy.',
-    module: () => import('../artworks/Shuriken.js')
+    module: () => import('../artworks/Shuriken.js?v=2')
   },
   {
     id: 'lumintree',
