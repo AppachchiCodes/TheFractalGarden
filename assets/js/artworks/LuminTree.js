@@ -10,7 +10,7 @@ export class LuminTree {
 
   getColorPalette() {
     if (!window.colorMode) return null;
-    return ['#FF8F8F', '#FF8F8F', '#C2E2FA', '#FFA500'];
+    return ['#80A1BA', '#B4DEBD', '#C2E2FA', '#FFF7DD'];
   }
 
   generateConfig() {

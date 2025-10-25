@@ -93,19 +93,29 @@ generateRandomConfig() {
       };
 
       p.draw = () => {
-        // Check if color mode changed
         if (lastColorMode !== window.colorMode) {
           updateColors();
         }
         
-        p.background(0, config.fadeSpeed);
+        let nodeSpeed = config.nodeSpeed;
+        let connectionDistance = config.connectionDistance;
+        let fadeSpeed = config.fadeSpeed;
         
-        // Draw connections
+        if (window.audioController && window.audioController.isActive()) {
+          const audio = window.audioController.getAudioData();
+          
+          nodeSpeed = config.nodeSpeed * (1 + audio.mid * 1.5);
+          connectionDistance = config.connectionDistance * (1 + audio.bass * 0.8);
+          fadeSpeed = config.fadeSpeed * (1 + audio.treble * 0.5);
+        }
+        
+        p.background(0, fadeSpeed);
+        
         for (let i = 0; i < self.nodes.length; i++) {
           let n = self.nodes[i];
           
-          n.x += n.dx;
-          n.y += n.dy;
+          n.x += n.dx * (nodeSpeed / config.nodeSpeed);
+          n.y += n.dy * (nodeSpeed / config.nodeSpeed);
           
           if (n.x < 0 || n.x > p.width) n.dx *= -1;
           if (n.y < 0 || n.y > p.height) n.dy *= -1;
@@ -114,11 +124,10 @@ generateRandomConfig() {
             let m = self.nodes[j];
             let d = p.dist(n.x, n.y, m.x, m.y);
             
-            if (d < config.connectionDistance) {
-              let alpha = p.map(d, 0, config.connectionDistance, config.lineAlpha, 0);
+            if (d < connectionDistance) {
+              let alpha = p.map(d, 0, connectionDistance, config.lineAlpha, 0);
               
               if (gradientColors) {
-                // Use pre-calculated gradient - just index into array (FAST!)
                 let t = p.map(n.y, 0, p.height, 0, 1);
                 let index = Math.floor(t * (gradientColors.length - 1));
                 index = p.constrain(index, 0, gradientColors.length - 1);
@@ -135,7 +144,6 @@ generateRandomConfig() {
           }
         }
         
-        // Draw nodes
         p.noStroke();
         for (let n of self.nodes) {
           if (gradientColors) {

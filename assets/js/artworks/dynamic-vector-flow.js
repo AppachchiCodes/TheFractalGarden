@@ -67,34 +67,46 @@ export class DynamicVectorFlow {
       };
 
       p.draw = () => {
-        if (lastColorMode !== window.colorMode) {
-          updateColors();
-        }
-        
-        p.background(0, config.fadeSpeed);
-        
-        for (let i = 0; i < config.lineCount; i++) {
-          let x = p.width * p.noise(i * config.noiseScale, self.t);
-          let y = p.height * p.noise(i * config.noiseScale + 100, self.t);
-          let nx = p.width * p.noise(i * config.noiseScale, self.t + 5);
-          let ny = p.height * p.noise(i * config.noiseScale + 105, self.t + 5);
-          
-          if (gradientColors) {
-            let index = Math.floor((i / config.lineCount) * (gradientColors.length - 1));
-            index = p.constrain(index, 0, gradientColors.length - 1);
-            p.stroke(gradientColors[index]);
-            p.strokeWeight(config.strokeWeight + 0.5);
-          } else {
-            let alpha = 100 + 155 * p.sin(self.t * 2 + i * 0.02);
-            p.stroke(255, alpha);
-            p.strokeWeight(config.strokeWeight);
-          }
-          
-          p.line(x, y, nx, ny);
-        }
-        
-        self.t += config.timeSpeed;
-      };
+  if (lastColorMode !== window.colorMode) {
+    updateColors();
+  }
+  
+  let fadeSpeed = config.fadeSpeed;
+  let lineCount = config.lineCount;
+  let timeSpeed = config.timeSpeed;
+  
+  if (window.audioController && window.audioController.isActive()) {
+    const audio = window.audioController.getAudioData();
+    
+    fadeSpeed = config.fadeSpeed * (1 + audio.bass * 0.3);
+    lineCount = Math.floor(config.lineCount * (1 + audio.mid * 0.5));
+    timeSpeed = config.timeSpeed * (1 + audio.treble * 1.5);
+  }
+  
+  p.background(0, fadeSpeed);
+  
+  for (let i = 0; i < lineCount; i++) {
+    let x = p.width * p.noise(i * config.noiseScale, self.t);
+    let y = p.height * p.noise(i * config.noiseScale + 100, self.t);
+    let nx = p.width * p.noise(i * config.noiseScale, self.t + 5);
+    let ny = p.height * p.noise(i * config.noiseScale + 105, self.t + 5);
+    
+    if (gradientColors) {
+      let index = Math.floor((i / lineCount) * (gradientColors.length - 1));
+      index = p.constrain(index, 0, gradientColors.length - 1);
+      p.stroke(gradientColors[index]);
+      p.strokeWeight(config.strokeWeight + 0.5);
+    } else {
+      let alpha = 100 + 155 * p.sin(self.t * 2 + i * 0.02);
+      p.stroke(255, alpha);
+      p.strokeWeight(config.strokeWeight);
+    }
+    
+    p.line(x, y, nx, ny);
+  }
+  
+  self.t += timeSpeed;
+};
 
       p.windowResized = () => {
         const container = document.getElementById(self.containerId);

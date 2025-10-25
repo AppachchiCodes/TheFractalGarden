@@ -323,3 +323,33 @@
   margin-top: var(--spacing-lg);
   transition: color var(--transition-slow);
 }
+
+.music-button {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  background: rgba(26, 26, 26, 0.9);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  opacity: 0.7;
+}
+
+.music-button:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+.music-button.active {
+  opacity: 1;
+  border-color: #4CAF50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+}
+
+.music-button svg {
+  display: block;
+}

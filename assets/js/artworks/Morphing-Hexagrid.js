@@ -83,18 +83,30 @@ export class MorphingHexagrid {
           updateColors();
         }
         
+        let sizeAmplitude = config.sizeAmplitude;
+        let timeSpeed = config.timeSpeed;
+        let spacing = config.spacing;
+        
+        if (window.audioController && window.audioController.isActive()) {
+          const audio = window.audioController.getAudioData();
+          
+          sizeAmplitude = config.sizeAmplitude * (1 + audio.bass * 2);
+          timeSpeed = config.timeSpeed * (1 + audio.mid * 1.5);
+          spacing = config.spacing * (1 + audio.treble * 0.3);
+        }
+        
         p.background(0);
         p.translate(p.width / 2, p.height / 2);
         
         for (let i = -config.cols; i < config.cols; i++) {
           for (let j = -config.rows; j < config.rows; j++) {
             p.push();
-            let x = i * config.spacing + (j % 2) * config.spacing / 2;
-            let y = j * config.spacing * 0.866;
+            let x = i * spacing + (j % 2) * spacing / 2;
+            let y = j * spacing * 0.866;
             p.translate(x, y);
             
             let dist = p.sqrt(x * x + y * y);
-            let size = config.baseSize + p.sin(self.t + dist * 0.05) * config.sizeAmplitude;
+            let size = config.baseSize + p.sin(self.t + dist * 0.05) * sizeAmplitude;
             let rot = self.t + dist * 0.01;
             p.rotate(rot);
             
@@ -114,7 +126,7 @@ export class MorphingHexagrid {
           }
         }
         
-        self.t += config.timeSpeed;
+        self.t += timeSpeed;
       };
 
       p.windowResized = () => {

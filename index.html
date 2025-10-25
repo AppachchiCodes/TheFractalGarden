@@ -6,20 +6,17 @@
   <meta name="description" content="The Fractal Garden - Explore mesmerizing generative art and interactive visualizations">
   <title>The Fractal Garden | Generative Art Gallery</title>
   
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/variables.css?v=2">
-  <link rel="stylesheet" href="/assets/css/base.css?v=2">
-  <link rel="stylesheet" href="/assets/css/components.css?v=2">
-  <link rel="stylesheet" href="/assets/css/layout.css?v=2">
-  <link rel="stylesheet" href="/assets/css/pages.css?v=2">
+  <link rel="stylesheet" href="/assets/css/variables.css?v=20250126001">
+  <link rel="stylesheet" href="/assets/css/base.css?v=20250126001">
+  <link rel="stylesheet" href="/assets/css/components.css?v=20250126001">
+  <link rel="stylesheet" href="/assets/css/layout.css?v=20250126001">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=20250126001">
 </head>
 <body>
-  <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="/" class="nav-brand">The Fractal Garden</a>
       
-      <!-- Hamburger Menu Button (Mobile) -->
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -31,7 +28,6 @@
         <li><a href="/downloads.html" class="nav-link">Download</a></li>
         <li><a href="/about.html" class="nav-link">About</a></li>
         
-        <!-- Social Icons in Nav (Desktop & Mobile) -->
         <li class="nav-social">
           <a href="https://github.com/AppachchiCodes" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="GitHub">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +51,6 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
   <main class="main-content">
     <section class="hero">
       <h1 class="hero-title">The Fractal Garden</h1>
@@ -63,13 +58,9 @@
       <p class="hero-credit">Project by U. Hewage</p>
     </section>
 
-    <!-- Gallery Grid -->
-    <section class="gallery" id="gallery">
-      <!-- Artwork cards will be dynamically inserted here -->
-    </section>
+    <section class="gallery" id="gallery"></section>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-social">
@@ -95,7 +86,6 @@
     </div>
   </footer>
 
-  <!-- Modal -->
   <div class="modal" id="artwork-modal">
     <div class="modal-overlay"></div>
     <div class="modal-content">
@@ -110,9 +100,9 @@
     </div>
   </div>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
-  <script type="module" src="/assets/js/core/app.js?v=2"></script>
-  <script src="/assets/js/components/hamburger.js?v=2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+  <script type="module" src="/assets/js/core/app.js?v=20250126001"></script>
+  <script src="/assets/js/components/hamburger.js?v=20250126001"></script>
 </body>
 </html>

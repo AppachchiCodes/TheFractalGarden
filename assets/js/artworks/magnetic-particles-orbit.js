@@ -78,41 +78,51 @@ export class MagneticParticlesOrbit {
       };
 
       p.draw = () => {
-        // Check if color mode changed
-        if (lastColorMode !== window.colorMode) {
-          updateColors();
-        }
-        
-        p.background(0, config.fadeSpeed);
-        p.translate(p.width / 2, p.height / 2);
-        
-        for (let particle of self.particles) {
-          let angle = p.noise(particle.x * config.noiseScale, particle.y * config.noiseScale) 
-                      * p.TWO_PI * config.angleMultiplier;
-          particle.x += p.cos(angle) * config.speed;
-          particle.y += p.sin(angle) * config.speed;
-          
-          if (p.dist(0, 0, particle.x, particle.y) > p.width / 2) {
-            particle.x = p.random(-p.width / 2, p.width / 2);
-            particle.y = p.random(-p.height / 2, p.height / 2);
-          }
-          
-          // Use pre-calculated gradient - just index into array (FAST!)
-          if (gradientColors) {
-            let distFromCenter = p.dist(0, 0, particle.x, particle.y);
-            let t = p.map(distFromCenter, 0, p.width / 2, 0, 1);
-            let index = Math.floor(t * (gradientColors.length - 1));
-            index = p.constrain(index, 0, gradientColors.length - 1);
-            p.stroke(gradientColors[index]);
-            p.strokeWeight(2);
-          } else {
-            p.stroke(255, config.alpha);
-            p.strokeWeight(1);
-          }
-          
-          p.point(particle.x, particle.y);
-        }
-      };
+  if (lastColorMode !== window.colorMode) {
+    updateColors();
+  }
+  
+  let fadeSpeed = config.fadeSpeed;
+  let speed = config.speed;
+  let angleMultiplier = config.angleMultiplier;
+  
+  if (window.audioController && window.audioController.isActive()) {
+    const audio = window.audioController.getAudioData();
+    
+    fadeSpeed = config.fadeSpeed * (1 + audio.bass * 0.5);
+    speed = config.speed * (1 + audio.mid * 2);
+    angleMultiplier = config.angleMultiplier * (1 + audio.bass);
+  }
+  
+  p.background(0, fadeSpeed);
+  p.translate(p.width / 2, p.height / 2);
+  
+  for (let particle of self.particles) {
+    let angle = p.noise(particle.x * config.noiseScale, particle.y * config.noiseScale) 
+                * p.TWO_PI * angleMultiplier;
+    particle.x += p.cos(angle) * speed;
+    particle.y += p.sin(angle) * speed;
+    
+    if (p.dist(0, 0, particle.x, particle.y) > p.width / 2) {
+      particle.x = p.random(-p.width / 2, p.width / 2);
+      particle.y = p.random(-p.height / 2, p.height / 2);
+    }
+    
+    if (gradientColors) {
+      let distFromCenter = p.dist(0, 0, particle.x, particle.y);
+      let t = p.map(distFromCenter, 0, p.width / 2, 0, 1);
+      let index = Math.floor(t * (gradientColors.length - 1));
+      index = p.constrain(index, 0, gradientColors.length - 1);
+      p.stroke(gradientColors[index]);
+      p.strokeWeight(2);
+    } else {
+      p.stroke(255, config.alpha);
+      p.strokeWeight(1);
+    }
+    
+    p.point(particle.x, particle.y);
+  }
+};
 
       p.windowResized = () => {
         const container = document.getElementById(self.containerId);

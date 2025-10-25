@@ -49,46 +49,58 @@ export class OceanCurrents {
       };
 
       p.draw = () => {
-        p.background(0, config.fadeSpeed);
-        
-        let yoff = 0;
-        for (let y = 0; y < rows; y++) {
-          let xoff = 0;
-          
-          // Color gradient based on y position
-          if (colors) {
-            let colorIndex = p.map(y, 0, rows, 0, colors.length - 1);
-            let c = p.lerpColor(
-              p.color(colors[Math.floor(colorIndex)]),
-              p.color(colors[Math.min(Math.ceil(colorIndex), colors.length - 1)]),
-              colorIndex % 1
-            );
-            p.stroke(c);
-            p.strokeWeight(2);
-          } else {
-            p.stroke(255, config.alpha);
-            p.strokeWeight(1);
-          }
-          
-          p.beginShape();
-          
-          for (let x = 0; x <= cols; x++) {
-            let angle = p.noise(xoff, yoff, self.zoff) * p.TWO_PI * config.angleMultiplier;
-            let wave = p.sin(angle) * config.waveAmplitude;
-            
-            let xx = x * config.scale;
-            let yy = y * config.scale + wave;
-            
-            p.vertex(xx, yy);
-            xoff += config.noiseScale;
-          }
-          
-          p.endShape();
-          yoff += config.noiseScale;
-        }
-        
-        self.zoff += config.zIncrement;
-      };
+  let waveAmplitude = config.waveAmplitude;
+  let angleMultiplier = config.angleMultiplier;
+  let zIncrement = config.zIncrement;
+  let fadeSpeed = config.fadeSpeed;
+  
+  if (window.audioController && window.audioController.isActive()) {
+    const audio = window.audioController.getAudioData();
+    
+    waveAmplitude = config.waveAmplitude * (1 + audio.bass * 2);
+    angleMultiplier = config.angleMultiplier * (1 + audio.mid * 0.8);
+    zIncrement = config.zIncrement * (1 + audio.treble * 1.5);
+  }
+  
+  p.background(0, fadeSpeed);
+  
+  let yoff = 0;
+  for (let y = 0; y < rows; y++) {
+    let xoff = 0;
+    
+    if (colors) {
+      let colorIndex = p.map(y, 0, rows, 0, colors.length - 1);
+      let c = p.lerpColor(
+        p.color(colors[Math.floor(colorIndex)]),
+        p.color(colors[Math.min(Math.ceil(colorIndex), colors.length - 1)]),
+        colorIndex % 1
+      );
+      p.stroke(c);
+      p.strokeWeight(2);
+    } else {
+      p.stroke(255, config.alpha);
+      p.strokeWeight(1);
+    }
+    
+    p.beginShape();
+    
+    for (let x = 0; x <= cols; x++) {
+      let angle = p.noise(xoff, yoff, self.zoff) * p.TWO_PI * angleMultiplier;
+      let wave = p.sin(angle) * waveAmplitude;
+      
+      let xx = x * config.scale;
+      let yy = y * config.scale + wave;
+      
+      p.vertex(xx, yy);
+      xoff += config.noiseScale;
+    }
+    
+    p.endShape();
+    yoff += config.noiseScale;
+  }
+  
+  self.zoff += zIncrement;
+};
 
       p.windowResized = () => {
         const container = document.getElementById(self.containerId);

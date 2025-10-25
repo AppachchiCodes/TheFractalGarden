@@ -41,15 +41,26 @@ export class DigitalDnaHelix {
       };
 
       p.draw = () => {
+        let amplitude = config.amplitude;
+        let waveSpeed = config.waveSpeed;
+        let timeIncrement = config.timeIncrement;
+        
+        if (window.audioController && window.audioController.isActive()) {
+          const audio = window.audioController.getAudioData();
+          
+          amplitude = config.amplitude * (1 + audio.bass * 1.5);
+          waveSpeed = config.waveSpeed * (1 + audio.mid * 0.8);
+          timeIncrement = config.timeIncrement * (1 + audio.treble * 2);
+        }
+        
         p.background(0);
         p.translate(p.width / 2, p.height / 2);
         
         for (let i = -180; i < 180; i += config.lineSpacing) {
-          let x1 = p.sin((i + self.t) * config.waveSpeed) * config.amplitude;
+          let x1 = p.sin((i + self.t) * waveSpeed) * amplitude;
           let x2 = -x1;
           let y = i;
           
-          // Color gradient from green to white
           if (colors) {
             let colorIndex = p.map(Math.abs(i), 0, 180, 0, colors.length - 1);
             let c = p.lerpColor(
@@ -77,7 +88,7 @@ export class DigitalDnaHelix {
           }
         }
         
-        self.t += config.timeIncrement;
+        self.t += timeIncrement;
       };
 
       p.windowResized = () => {

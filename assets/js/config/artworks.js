@@ -20,16 +20,28 @@ export const ARTWORKS = [
     module: () => import('../artworks/magnetic-particles-orbit.js')
   },
   {
-    id: 'digital-dna-helix',
-    title: 'Digital DNA Helix',
-    description: 'A wave-driven double helix rotates endlessly, evoking the elegant structure of life itself.',
-    module: () => import('../artworks/digital-dna-helix.js')
+    id: 'harmonic-interference',
+    title: 'Harmonic Interference',
+    description: 'Waves collide and merge, generating intricate moiré patterns that shimmer like ripples on a cosmic pond.',
+    module: () => import('../artworks/Harmonic-Interference.js')
+  },
+  {
+    id: 'morphing-hexagrid',
+    title: 'Morphing Hexagrid',
+    description: 'A crystalline lattice breathes and rotates, each hexagonal cell pulsing with synchronized mathematical life.',
+    module: () => import('../artworks/Morphing-Hexagrid.js')
   },
   {
     id: 'particle-warp-field',
     title: 'Particle Warp Field',
     description: 'Particles accelerate toward a gravitational center, warping space and time in their spiraling trajectories.',
     module: () => import('../artworks/particle-warp-field.js')
+  },
+  {
+    id: 'lumintree',
+    title: 'LuminTree',
+    description: 'A luminous fractal tree sways with the breath of invisible wind, its branches reaching toward infinite recursion.',
+    module: () => import('../artworks/LuminTree.js')
   },
   {
     id: 'neural-pulse-grid',
@@ -80,21 +92,9 @@ export const ARTWORKS = [
     module: () => import('../artworks/Shuriken.js?v=2')
   },
   {
-    id: 'lumintree',
-    title: 'LuminTree',
-    description: 'A luminous fractal tree sways with the breath of invisible wind, its branches reaching toward infinite recursion.',
-    module: () => import('../artworks/LuminTree.js')
-  },
-  {
-    id: 'harmonic-interference',
-    title: 'Harmonic Interference',
-    description: 'Waves collide and merge, generating intricate moiré patterns that shimmer like ripples on a cosmic pond.',
-    module: () => import('../artworks/Harmonic-Interference.js')
-  },
-  {
-    id: 'morphing-hexagrid',
-    title: 'Morphing Hexagrid',
-    description: 'A crystalline lattice breathes and rotates, each hexagonal cell pulsing with synchronized mathematical life.',
-    module: () => import('../artworks/Morphing-Hexagrid.js')
+    id: 'digital-dna-helix',
+    title: 'Digital DNA Helix',
+    description: 'A wave-driven double helix rotates endlessly, evoking the elegant structure of life itself.',
+    module: () => import('../artworks/digital-dna-helix.js')
   }
 ];

@@ -105,11 +105,18 @@ export class Gallery {
   }
 
   randomizeArtwork(artworkId) {
-    const artwork = this.artworkInstances.get(artworkId);
-    if (artwork && artwork.instance) {
+  const artwork = this.artworkInstances.get(artworkId);
+  if (artwork && artwork.instance) {
+    if (window.audioController && window.audioController.isActive()) {
+      window.audioController.pause();
+      setTimeout(() => {
+        artwork.instance.randomize();
+      }, 100);
+    } else {
       artwork.instance.randomize();
     }
   }
+}
 
   async showArtworkDetails(artworkId) {
     const artwork = this.artworkInstances.get(artworkId);

@@ -49,18 +49,31 @@ export class BreathingMandala {
       };
 
       p.draw = () => {
+        let breathSpeed = config.breathSpeed;
+        let rotationSpeed = config.rotationSpeed;
+        let minSize = config.minSize;
+        let maxSize = config.maxSize;
+        
+        if (window.audioController && window.audioController.isActive()) {
+          const audio = window.audioController.getAudioData();
+          
+          breathSpeed = config.breathSpeed * (1 + audio.mid * 1.5);
+          rotationSpeed = config.rotationSpeed * (1 + audio.treble * 2);
+          minSize = config.minSize * (1 + audio.bass * 0.8);
+          maxSize = config.maxSize * (1 + audio.bass * 0.8);
+        }
+        
         p.background(0);
         p.translate(p.width / 2, p.height / 2);
         
-        let breath = p.sin(self.t) * 0.5 + 0.5; // 0 to 1
+        let breath = p.sin(self.t) * 0.5 + 0.5;
         
         for (let layer = 0; layer < config.layers; layer++) {
-          let size = p.map(layer, 0, config.layers, config.minSize, config.maxSize);
+          let size = p.map(layer, 0, config.layers, minSize, maxSize);
           let breathSize = size * (1 + breath * 0.3);
           
-          let rotation = self.t * config.rotationSpeed * (layer % 2 === 0 ? 1 : -1);
+          let rotation = self.t * rotationSpeed * (layer % 2 === 0 ? 1 : -1);
           
-          // Color gradient based on layer - use pre-converted colors
           if (colorObjects) {
             let colorIndex = p.map(layer, 0, config.layers - 1, 0, colorObjects.length - 1);
             let c = p.lerpColor(
@@ -87,9 +100,8 @@ export class BreathingMandala {
           }
           p.endShape(p.CLOSE);
           
-          // Draw connecting lines
           if (layer < config.layers - 1 && colorObjects) {
-            let nextSize = p.map(layer + 1, 0, config.layers, config.minSize, config.maxSize);
+            let nextSize = p.map(layer + 1, 0, config.layers, minSize, maxSize);
             let nextBreathSize = nextSize * (1 + breath * 0.3);
             
             let colorIndex = p.map(layer, 0, config.layers - 1, 0, colorObjects.length - 1);
@@ -111,7 +123,7 @@ export class BreathingMandala {
             }
           } else if (layer < config.layers - 1) {
             p.stroke(255, config.alpha * 0.3);
-            let nextSize = p.map(layer + 1, 0, config.layers, config.minSize, config.maxSize);
+            let nextSize = p.map(layer + 1, 0, config.layers, minSize, maxSize);
             let nextBreathSize = nextSize * (1 + breath * 0.3);
             
             for (let i = 0; i < config.sides; i++) {
@@ -128,7 +140,7 @@ export class BreathingMandala {
           p.pop();
         }
         
-        self.t += config.breathSpeed;
+        self.t += breathSpeed;
       };
 
       p.windowResized = () => {

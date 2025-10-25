@@ -1,22 +1,21 @@
-// Main Application
-// Initializes the gallery and manages global state
-
 import { Gallery } from '../components/gallery.js';
 import { ColorizeButton } from '../components/colorize-button.js';
+import { AudioController } from '../components/audio-controller.js';
+import { MusicButton } from '../components/music-button.js';
 
 class App {
   constructor() {
     this.gallery = null;
     this.colorizeButton = null;
+    this.audioController = null;
+    this.musicButton = null;
     
-    // Initialize global color mode state
     window.colorMode = false;
     
     this.init();
   }
 
   async init() {
-    // Wait for DOM to be ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => this.start());
     } else {
@@ -26,16 +25,15 @@ class App {
 
   async start() {
     try {
-      // Initialize gallery
       this.gallery = new Gallery();
       await this.gallery.init();
       
-      // Initialize colorize button
       this.colorizeButton = new ColorizeButton((colorMode) => {
         this.onColorModeChange(colorMode);
       });
       
-      // Setup navigation active state
+      await this.initAudio();
+      
       this.setupNavigation();
       
       console.log('The Fractal Garden initialized successfully');
@@ -45,13 +43,28 @@ class App {
     }
   }
 
+  async initAudio() {
+    try {
+      console.log('Initializing audio system...');
+      
+      this.audioController = new AudioController();
+      await this.audioController.init('assets/audio/track.mp3');
+      
+      this.musicButton = new MusicButton(this.audioController);
+      
+      window.audioController = this.audioController;
+      
+      console.log('Audio system ready!');
+    } catch (error) {
+      console.error('Audio initialization failed:', error);
+    }
+  }
+
   onColorModeChange(colorMode) {
     console.log(`Color mode ${colorMode ? 'enabled' : 'disabled'}`);
     
-    // Update global state
     window.colorMode = colorMode;
     
-    // Reload all artworks with new color mode
     if (this.gallery) {
       this.gallery.reloadAllArtworks();
     }
@@ -83,5 +96,4 @@ class App {
   }
 }
 
-// Initialize app
 new App();

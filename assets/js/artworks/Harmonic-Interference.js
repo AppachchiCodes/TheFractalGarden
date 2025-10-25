@@ -81,39 +81,51 @@ export class HarmonicInterference {
       };
 
       p.draw = () => {
-        if (lastColorMode !== window.colorMode) {
-          updateColors();
-        }
-        
-        p.background(0, 30);
-        p.translate(p.width / 2, p.height / 2);
-        
-        for (let i = 0; i < config.rings; i++) {
-          let radius = config.baseRadius + i * config.radiusSpacing;
-          let wave = p.sin(self.t + i * 0.1) * config.waveAmplitude;
-          
-          if (gradientColors) {
-            let index = Math.floor((i / config.rings) * (gradientColors.length - 1));
-            index = p.constrain(index, 0, gradientColors.length - 1);
-            p.stroke(gradientColors[index]);
-            p.strokeWeight(config.strokeWeight + 0.5);
-          } else {
-            p.stroke(255, config.strokeAlpha);
-            p.strokeWeight(config.strokeWeight);
-          }
-          
-          p.beginShape();
-          for (let a = 0; a < p.TWO_PI; a += 0.1) {
-            let r = radius + wave * p.sin(a * config.waveFrequency + self.t);
-            let x = r * p.cos(a);
-            let y = r * p.sin(a);
-            p.vertex(x, y);
-          }
-          p.endShape(p.CLOSE);
-        }
-        
-        self.t += config.timeSpeed;
-      };
+  if (lastColorMode !== window.colorMode) {
+    updateColors();
+  }
+  
+  let waveAmplitude = config.waveAmplitude;
+  let waveFrequency = config.waveFrequency;
+  let timeSpeed = config.timeSpeed;
+  
+  if (window.audioController && window.audioController.isActive()) {
+    const audio = window.audioController.getAudioData();
+    
+    waveAmplitude = config.waveAmplitude * (1 + audio.bass * 1.5);
+    waveFrequency = config.waveFrequency * (1 + audio.mid * 0.5);
+    timeSpeed = config.timeSpeed * (1 + audio.treble * 0.8);
+  }
+  
+  p.background(0, 30);
+  p.translate(p.width / 2, p.height / 2);
+  
+  for (let i = 0; i < config.rings; i++) {
+    let radius = config.baseRadius + i * config.radiusSpacing;
+    let wave = p.sin(self.t + i * 0.1) * waveAmplitude;
+    
+    if (gradientColors) {
+      let index = Math.floor((i / config.rings) * (gradientColors.length - 1));
+      index = p.constrain(index, 0, gradientColors.length - 1);
+      p.stroke(gradientColors[index]);
+      p.strokeWeight(config.strokeWeight + 0.5);
+    } else {
+      p.stroke(255, config.strokeAlpha);
+      p.strokeWeight(config.strokeWeight);
+    }
+    
+    p.beginShape();
+    for (let a = 0; a < p.TWO_PI; a += 0.1) {
+      let r = radius + wave * p.sin(a * waveFrequency + self.t);
+      let x = r * p.cos(a);
+      let y = r * p.sin(a);
+      p.vertex(x, y);
+    }
+    p.endShape(p.CLOSE);
+  }
+  
+  self.t += timeSpeed;
+};
 
       p.windowResized = () => {
         const container = document.getElementById(self.containerId);

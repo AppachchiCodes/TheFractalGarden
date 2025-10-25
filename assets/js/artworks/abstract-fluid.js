@@ -40,35 +40,46 @@ export class AbstractFluid {
       };
 
       p.draw = () => {
-        p.background(0);
+      let lineLength = config.lineLength;
+      let angleMultiplier = config.angleMultiplier;
+      let timeSpeed = config.timeSpeed;
+      
+      if (window.audioController && window.audioController.isActive()) {
+        const audio = window.audioController.getAudioData();
         
-        for (let x = 0; x < p.width; x += config.gridSpacing) {
-          for (let y = 0; y < p.height; y += config.gridSpacing) {
-            let angle = p.noise(x * config.noiseScale, y * config.noiseScale, self.t) * p.TWO_PI * config.angleMultiplier;
-            let x2 = x + p.cos(angle) * config.lineLength;
-            let y2 = y + p.sin(angle) * config.lineLength;
-            
-            // Color gradient based on position
-            if (colors) {
-              let colorIndex = p.map(y, 0, p.height, 0, colors.length - 1);
-              let c = p.lerpColor(
-                p.color(colors[Math.floor(colorIndex)]),
-                p.color(colors[Math.ceil(colorIndex)]),
-                colorIndex % 1
-              );
-              p.stroke(c);
-              p.strokeWeight(1.5);
-            } else {
-              p.stroke(255, config.alpha);
-              p.strokeWeight(1);
-            }
-            
-            p.line(x, y, x2, y2);
+        lineLength = config.lineLength * (1 + audio.bass * 1.2);
+        angleMultiplier = config.angleMultiplier * (1 + audio.mid * 0.8);
+        timeSpeed = config.timeSpeed * (1 + audio.treble * 2);
+      }
+      
+      p.background(0);
+      
+      for (let x = 0; x < p.width; x += config.gridSpacing) {
+        for (let y = 0; y < p.height; y += config.gridSpacing) {
+          let angle = p.noise(x * config.noiseScale, y * config.noiseScale, self.t) * p.TWO_PI * angleMultiplier;
+          let x2 = x + p.cos(angle) * lineLength;
+          let y2 = y + p.sin(angle) * lineLength;
+          
+          if (colors) {
+            let colorIndex = p.map(y, 0, p.height, 0, colors.length - 1);
+            let c = p.lerpColor(
+              p.color(colors[Math.floor(colorIndex)]),
+              p.color(colors[Math.ceil(colorIndex)]),
+              colorIndex % 1
+            );
+            p.stroke(c);
+            p.strokeWeight(1.5);
+          } else {
+            p.stroke(255, config.alpha);
+            p.strokeWeight(1);
           }
+          
+          p.line(x, y, x2, y2);
         }
-        
-        self.t += config.timeSpeed;
-      };
+      }
+      
+      self.t += timeSpeed;
+    };
 
       p.windowResized = () => {
         const container = document.getElementById(self.containerId);
