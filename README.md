@@ -1,17 +1,41 @@
-MIT License
-Copyright (c) 2025 Udantha Hewage
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+# The Fractal Garden
+
+A collection of interactive, generative fractal and procedural artworks built with p5.js.
+
+Explore the beauty of mathematical patterns, recursive structures, and algorithmic art — all rendered live in your browser.
+
+**Live Site:** [thefractalgarden.space](https://thefractalgarden.space)
+
+---
+
+## What It Is
+
+An online generative art gallery featuring interactive fractal visualizations and procedural artwork. Each piece is algorithmically generated, creating unique patterns through mathematics and code.
+
+## Built With
+
+- **p5.js** — Creative coding framework
+- **JavaScript** — Core logic and interactivity
+- **HTML/CSS** — Gallery interface
+
+## Features
+
+- Interactive fractal visualizations
+- Generative art gallery with multiple pieces
+- Download artworks as images
+- View the source code behind each artwork
+
+## Run Locally
+```bash
+git clone https://github.com/AppachchiCodes/TheFractalGarden.git
+cd TheFractalGarden
+# Open index.html in your browser, or use Live Server in VS Code
+```
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+Made by [Udantha Hewage](https://github.com/AppachchiCodes)
