@@ -15,8 +15,8 @@ An online generative art gallery featuring interactive fractal visualizations an
 ## Built With
 
 - **p5.js** - Creative coding framework
-- **JavaScript** — Core logic and interactivity
-- **HTML/CSS** — Gallery interface
+- **JavaScript** - Core logic and interactivity
+- **HTML/CSS** - Gallery interface
 
 ## Features
 
@@ -39,4 +39,5 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 Made by [Udantha Hewage](https://github.com/AppachchiCodes)
+
 
