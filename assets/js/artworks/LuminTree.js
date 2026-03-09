@@ -125,9 +125,7 @@ export class LuminTree {
   }
 
   randomize() {
-    // Only randomize sway speed, keep tree structure the same
     this.config.swaySpeed = Math.random() * 0.005 + 0.008;
-    // No need to destroy and reinit - just update the config
   }
 
   destroy() {
